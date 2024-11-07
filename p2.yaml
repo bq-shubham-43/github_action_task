@@ -1,0 +1,23 @@
+name: P2
+
+#usiing workflow run to establish the dependency on first pipeline P1
+on:
+  workflow_run:
+    workflows: ["P1"]
+    types:
+      - completed
+
+jobs:
+
+  notifyTelegram:
+  # this specifies that the workflow will only run when the wf on which this wf is depending is successfull 
+    if: ${{ github.event.workflow_run.conclusion == 'success' }} 
+    runs-on: ubuntu-latest
+    steps:
+    - name: send custom message
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_CHAT_ID }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          The pipeline P1 is SUCCESSFULL
