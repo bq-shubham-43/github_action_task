@@ -19,6 +19,16 @@ jobs:
           run: |
             git config --global user.name "${{ github.actor }}"  # Use the GitHub actor (e.g., GitHub username)
             git config --global user.email "${{ github.actor }}@users.noreply.github.com"  # Use the noreply email address
+        - name: Trigger the same workflow from within itself
+          env:
+              GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}  # PAT TOKEN
+          run: |
+              # API call to trigger the same workflow again
+              curl -X POST \
+                -H "Authorization: token $GITHUB_TOKEN" \
+                -H "Accept: application/vnd.github.v3+json" \
+                -d '{"ref": "${{ github.ref }}"}' \
+                https://api.github.com/repos/${{ github.repository }}/actions/workflows/${{ github.workflow }}/dispatches
         - name: Create a new file in a specific branch
           run: |
             # Create a new file in a specific branch: - 
