@@ -18,7 +18,7 @@ jobs:
             git config --global user.email "${{ github.actor }}@users.noreply.github.com"  # Use the noreply email address
         - name: Create file "f1.txt"
           run: |
-             echo "Hi...I am file 1" >f1.txt
+             echo "Hi...I am file 1" > f1.txt
         - name: Create a new file in a specific branch
           run: |
             # Create a new file in a specific branch: - 
