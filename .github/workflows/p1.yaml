@@ -1,0 +1,35 @@
+name: P1
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number for the deployment'
+        required: true
+        default: '1.0.0'
+permissions: # this is to give the write permisson so that the files can be created 
+   contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+        - name: Set up Git user
+          run: |
+            git config --global user.name "${{ github.actor }}"  # Use the GitHub actor (e.g., GitHub username)
+            git config --global user.email "${{ github.actor }}@users.noreply.github.com"  # Use the noreply email address
+        - name: Create a new file in a specific branch
+          run: |
+            # Create a new file in a specific branch: - 
+            echo "Hello World" > f2.txt
+            
+            # Create a new branch from the 'main' branch
+            git checkout -b feature-branch
+            git add f2.txt
+            
+            # Commit the changes
+            git commit -m "Add new file to feature-branch"
+            
+            # Push the changes to 'feature-branch'
+            git push origin feature-branch
