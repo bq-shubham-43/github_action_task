@@ -20,4 +20,4 @@ jobs:
         to: ${{ secrets.TELEGRAM_CHAT_ID }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          The pipeline P1 is SUCCESSFULL
+           The pipeline P1 execution is SUCCESSFULL
