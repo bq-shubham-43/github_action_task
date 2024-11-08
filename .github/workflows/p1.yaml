@@ -19,17 +19,20 @@ jobs:
         - name: Create file "f1.txt"
           run: |
              echo "Hi...I am file 1" > f1.txt
+             git add f1.txt
+             git commit -m "Add f1 file"
+             git push origin main
         - name: Create a new file in a specific branch
           run: |
             # Create a new file in a specific branch: - 
             echo "Hello World" > f2.txt
             
-            # Create a new branch from the 'main' branch
+            # Create a new branch
             git checkout -b feature-branch
             git add f2.txt
             
             # Commit the changes
-            git commit -m "Add new file to feature-branch"
+            git commit -m "Add file f2 to feature-branch"
             
             # Push the changes to 'feature-branch'
             git push origin feature-branch
